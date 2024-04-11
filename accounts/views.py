@@ -47,6 +47,11 @@ def login(request):
 def plataforma(request):
     return render(request, 'index.html')
 
+
+@login_required(login_url='/account/profile/')
+def profile(request):
+    return render(request, 'profile.html')
+
  
         
           
