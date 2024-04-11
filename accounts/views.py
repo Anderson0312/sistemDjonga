@@ -4,6 +4,8 @@ from django.shortcuts import render
 
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login as login_django
 
 
 
@@ -36,15 +38,15 @@ def login(request):
         
         user = authenticate(username=username, password=password)
         if user:
-            login(request, user)
+            login_django(request, user)
             return HttpResponse('User autenticada com sucesso')
         else:
             return HttpResponse('user ou senha invalida')
         
+@login_required(login_url='/account/login/')
 def plataforma(request):
-    if request.user.is_authenticated:
-        return render(request, 'index.html')
-    return HttpResponse('Voce precisaa estar logado')
+    return render(request, 'index.html')
+
  
         
           
