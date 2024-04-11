@@ -320,10 +320,18 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="login/">
+              {% if user.is_authenticated %}
+              <a class="nav-link d-flex align-items-center gap-2" href="../accounts/login/">
+                <svg class="bi"><use xlink:href="#door-closed"/></svg>
+                 olá, {{user.username}}
+
+              </a>
+              {% else %}
+              <a class="nav-link d-flex align-items-center gap-2" href="../accounts/login/">
                 <svg class="bi"><use xlink:href="#door-closed"/></svg>
                 Sign up / login
               </a>
+              {% endif%}
             </li>
           </ul>
         </div>
@@ -348,6 +356,31 @@
       <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
       <h2>Products</h2>
+      {% for x in mProducts %}
+      <div class="table-responsive small">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name Product</th>
+              <th scope="col">Valor</th>
+              <th scope="col">description</th>
+              <th scope="col">category</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{x.id}}</td>
+              <td>{{x.name}}</td>
+              <td>{{x.valor}}</td>
+              <td>{{x.description}}</td>
+              <td>{{x.category}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      {% endfor %}
+      <h2></h2>
       {% for x in mProducts %}
       <div class="table-responsive small">
         <table class="table table-striped table-sm">

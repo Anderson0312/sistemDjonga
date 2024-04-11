@@ -153,35 +153,38 @@
       </ul>
     </div>
 
-    
+{% block content %}
 <main class="form-signin w-100 m-auto">
-  <form action='createUser/' method="post">
+  <form method="post">
     {% csrf_token %}
-    <a class="nav-link d-flex align-items-center gap-2" href="./../">
+    <a class="nav-link d-flex align-items-center gap-2" href="/AppSiteDjango/">
       <img class="mb-4" src="{% static '/brand/bootstrap-logo.svg' %}" alt="" width="72" height="57">
     </a>
 
     <h1 class="h3 mb-3 fw-normal">Please your login</h1>
 
     <div class="form-floating">
-      <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Email address</label>
+      <input type="text" name="username" class="form-control" for="id_username" placeholder="username">
+      <label for="floatingInput">Username</label>
     </div>
     <div class="form-floating">
-      <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <input type="password" name="password" class="form-control" for="id_password" placeholder="Password">
       <label for="floatingPassword">Password</label>
     </div>
 
-    <button class="btn btn-primary w-100 py-2" type="submit" value="create">login</button>
+    <button class="btn btn-primary w-100 py-2" type="submit">login</button>
 
     <div class="form-check text-start my-3">
-      <a class="nav-link d-flex align-items-center gap-2" href="../signup/">
+      <a class="nav-link d-flex align-items-center gap-2" href="/register/">
         Cadastrar-se
       </a>
     </div>
     <p class="mt-5 mb-3 text-body-secondary">&copy; 2024</p>
   </form>
+
 </main>
+{% endblock %}
+
 <script src="{% static 'dist/js/bootstrap.bundle.min.js' %}"></script>
 
     </body>

@@ -22,6 +22,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'AppSiteDjango',
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -119,3 +120,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+LOGIN_URL = 'login'
+# LOGIN_REDIRECT_URL = '/AppSiteDjango'
+LOGOUT_REDIRECT_URL = '/AppSiteDjango'
