@@ -1,16 +1,15 @@
-from pathlib import Path
 
 import os
+from pathlib import Path
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*)7##dvjcu@ce19y5!uwz+38p=puc-yt%qy3fbpm_8x0!8drd#'
+SECRET_KEY = 'django-insecure--9_yovf#y-q!h#6_=lwg_xyi-0zn*&gkvi%@j$^b7d=bvxs-^5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -21,14 +20,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'AppSiteDjango',
-    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -41,7 +39,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'WebSiteDjango.urls'
+ROOT_URLCONF = 'SistemEmpresarial.urls'
 
 TEMPLATES = [
     {
@@ -59,7 +57,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'WebSiteDjango.wsgi.application'
+WSGI_APPLICATION = 'SistemEmpresarial.wsgi.application'
 
 
 # Database
@@ -106,7 +104,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-
 # Configuração dos arquivos estáticos
 STATIC_URL = '/assets/'
 STATICFILES_DIRS = [
@@ -121,9 +118,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-
-LOGIN_URL = 'login'
-# LOGIN_REDIRECT_URL = '/AppSiteDjango'
-LOGOUT_REDIRECT_URL = '/AppSiteDjango'

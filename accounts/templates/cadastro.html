@@ -153,9 +153,9 @@
       </ul>
     </div>
 
-{%block content%}
+
 <main class="form-signin w-100 m-auto">
-  <form method="POST">
+  <form method="post" action="">
     {% csrf_token %}
     <a class="nav-link d-flex align-items-center gap-2" href="/AppSiteDjango/">
       <img class="mb-4" src="{% static '/brand/bootstrap-logo.svg' %}" alt="" width="72" height="57">
@@ -195,7 +195,7 @@
 
 </main>
 
-{%endblock%}
+
 <script src="{% static 'dist/js/bootstrap.bundle.min.js' %}"></script>
 
     </body>

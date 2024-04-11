@@ -1,18 +1,15 @@
-from multiprocessing import context
-
 from django.http import HttpResponse, HttpResponseRedirect
 
 from django.shortcuts import render
-from django.template import loader
 
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
 
 
-def register(request):
+def cadastro(request):
     if request.method == "GET":
-            return render(request, 'registration/cadastro.html')
+            return render(request, 'cadastro.html')
             
     else:
         username = request.POST.get('username')
@@ -25,25 +22,29 @@ def register(request):
             return HttpResponse('Já existe um usuario com este username')
         
         user = User.objects.create_user(username=username, email=email, password=password)
-        user.save()        
-        return HttpResponse("usuario cadastrado com sucesso")
+        print(user)      
+        return HttpResponse("usuario cadastrado com sucesso " + username)
     
 
 def login(request):
     if request.method == "GET":
-        print('1')
-        return render(request, '/registration/login.html')
+        return render(request, 'login.html')
         
     else:
         username = request.POST.get('username')
         password = request.POST.get('password')
         
         user = authenticate(username=username, password=password)
-        print('2')
         if user:
             login(request, user)
             return HttpResponse('User autenticada com sucesso')
         else:
-            return HttpResponse('user não encontrado')
+            return HttpResponse('user ou senha invalida')
+        
+def plataforma(request):
+    if request.user.is_authenticated:
+        return render(request, 'index.html')
+    return HttpResponse('Voce precisaa estar logado')
+ 
         
           
