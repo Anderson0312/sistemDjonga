@@ -1,5 +1,18 @@
-<html>
-    <h1>
-        perfil {{user.email}}
-    </h1>
-</html>
+{% include 'templatebase/navbar.html' %}
+
+<h1>
+    perfil {{user.email}}
+</h1>
+
+
+{% if user.is_authenticated %}
+    <h1>Hi </h1> {{ user.username }}!
+<form action="{% url 'logout' %}" method="post">
+  {% csrf_token %}
+  <button type="submit">Log Out</button>
+</form>
+{% else %}
+<p>You are not logged in</p>
+{% endif%}
+
+{% include 'templatebase/footer.html' %}

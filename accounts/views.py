@@ -7,6 +7,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as login_django
 
+from django.urls import reverse
+from django.shortcuts import redirect
+
 
 
 def cadastro(request):
@@ -22,10 +25,9 @@ def cadastro(request):
         
         if user:
             return HttpResponse('Já existe um usuario com este username')
-        
-        user = User.objects.create_user(username=username, email=email, password=password)
-        print(user)      
-        return HttpResponse("usuario cadastrado com sucesso " + username)
+        else:
+            user = User.objects.create_user(username=username, email=email, password=password)
+            return redirect(reverse('login'))
     
 
 def login(request):
@@ -39,18 +41,19 @@ def login(request):
         user = authenticate(username=username, password=password)
         if user:
             login_django(request, user)
-            return HttpResponse('User autenticada com sucesso')
+            return render(request, 'index.html')
         else:
             return HttpResponse('user ou senha invalida')
         
-@login_required(login_url='/account/login/')
-def plataforma(request):
-    return render(request, 'index.html')
 
-
-@login_required(login_url='/account/profile/')
+@login_required(login_url='/accounts/profile/')
 def profile(request):
     return render(request, 'profile.html')
+
+
+@login_required(login_url='/accounts/logout/')
+def logout(request):
+    return render(request, 'login.html')
 
  
         
