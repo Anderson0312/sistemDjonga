@@ -19,6 +19,11 @@ def cadastro(request):
     else:
         username = request.POST.get('username')
         email = request.POST.get('email')
+        name = request.POST.get('name')
+        profissao = request.POST.get('profissao')
+        sexo = request.POST.get('sexo')
+        pais = request.POST.get('pais')
+        city = request.POST.get('city')
         password = request.POST.get('password')
         
         user = User.objects.filter(username=username).first()
@@ -26,7 +31,7 @@ def cadastro(request):
         if user:
             return HttpResponse('Já existe um usuario com este username')
         else:
-            user = User.objects.create_user(username=username, email=email, password=password)
+            user = User.objects.create_user(username=username, email=email, name=name, profissao=profissao, sexo=sexo, pais=pais, city=city, password=password)
             return redirect(reverse('login'))
     
 
