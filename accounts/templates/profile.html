@@ -1,18 +1,71 @@
 {% include 'templatebase/navbar.html' %}
 
-<h1>
-    perfil {{user.email}}
-</h1>
+<div class="container rounded bg-white mt-5 mb-5">
+  <div class="row">
+      <div class="col-md-3 border-right">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold text-black">{{user.username}}</span><span class="text-black-50 text-black">{{user.email}}</span><span> </span></div>
+      </div>
+      <div class="col-md-5 border-right">
+          <div class="p-3 py-5">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="text-right text-black">Profile Settings</h4>
+              </div>
+              <div class="row mt-2">
+
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">first name</span>
+                    <input type="text" class="form-control" placeholder="anderson" aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+              </div>
+              <div class="row mt-2">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">last name</span>
+                  <input type="text" class="form-control" placeholder="moura" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Email</span>
+                  <input type="text" class="form-control" placeholder="user@gmail.com" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Profissão</span>
+                  <input type="text" class="form-control" placeholder="Desenvolvedor" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Sexualidade</span>
+                  <input type="text" class="form-control" placeholder="masculino" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">Pais</span>
+                  <input type="text" class="form-control" placeholder="Brasil" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">City</span>
+                  <input type="text" class="form-control" placeholder="Rio de janeiro" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+              </div>
+              <div class="mt-3 text-center d-flex justify-content-evenly">
+                {% if user.is_authenticated %}
+                <button class="btn btn-primary profile-button text-black m" type="button ">Save Profile</button>
+            
+                <form action="{% url 'logout' %}" method="post">
+                  {% csrf_token %}
+                  <button class="btn btn-danger profile-button text-black" type="submit">Log Out</button>
+                </form>
+                {% endif%}
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+</div>
 
 
-{% if user.is_authenticated %}
-    <h1>Hi </h1> {{ user.username }}!
-<form action="{% url 'logout' %}" method="post">
-  {% csrf_token %}
-  <button type="submit">Log Out</button>
-</form>
-{% else %}
-<p>You are not logged in</p>
-{% endif%}
 
 {% include 'templatebase/footer.html' %}
