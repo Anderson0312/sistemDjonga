@@ -31,7 +31,7 @@ def cadastro(request):
         if user:
             return HttpResponse('Já existe um usuario com este username')
         else:
-            user = User.objects.create_user(username=username, email=email, name=name, profissao=profissao, sexo=sexo, pais=pais, city=city, password=password)
+            user = User.objects.create_user(username=username, email=email, password=password)
             return redirect(reverse('login'))
     
 
@@ -46,7 +46,7 @@ def login(request):
         user = authenticate(username=username, password=password)
         if user:
             login_django(request, user)
-            return render(request, 'index.html')
+            return redirect(reverse('index'))
         else:
             return HttpResponse('user ou senha invalida')
         
