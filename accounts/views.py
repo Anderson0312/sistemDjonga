@@ -10,6 +10,8 @@ from django.contrib.auth import login as login_django
 from django.urls import reverse
 from django.shortcuts import redirect
 
+from accounts.models import  UserProfile
+
 
 
 def cadastro(request):
@@ -19,7 +21,7 @@ def cadastro(request):
     else:
         username = request.POST.get('username')
         email = request.POST.get('email')
-        name = request.POST.get('name')
+        namecomplte = request.POST.get('namecomplte')
         profissao = request.POST.get('profissao')
         sexo = request.POST.get('sexo')
         pais = request.POST.get('pais')
@@ -29,11 +31,12 @@ def cadastro(request):
         user = User.objects.filter(username=username).first()
         
         if user:
-            return HttpResponse('Já existe um usuario com este username')
+            return HttpResponse('Já existe um usuário com este username')
         else:
-            user = User.objects.create_user(username=username, email=email, name=name, profissao=profissao, sexo=sexo, pais=pais, city=city, password=password)
+            user = User.objects.create(username=username, email=email, password=password)
+            profile = UserProfile.objects.create(user=user, profissao="profissao", namecomplte="namecomplte", sexo="sexo", pais="pais", city="city")
             return redirect(reverse('login'))
-    
+     
 
 def login(request):
     if request.method == "GET":
@@ -44,6 +47,8 @@ def login(request):
         password = request.POST.get('password')
         
         user = authenticate(username=username, password=password)
+        print(username)
+        print(password)
         if user:
             login_django(request, user)
             return render(request, 'index.html')
