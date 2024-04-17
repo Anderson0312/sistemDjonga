@@ -14,7 +14,7 @@ from plataforma.models import Products
 @login_required(login_url='')
 def index(request):
     mProducts = Products.objects.all().values()
-    mUser = UserProfile.objects.all().values()
+    mUser = User.objects.all().values()
     
     context = {
         'mProducts': mProducts,
@@ -22,7 +22,6 @@ def index(request):
     }
       
 
-    
     template = loader.get_template('index.html')
     
     return HttpResponse(template.render(context, request))

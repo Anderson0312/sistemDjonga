@@ -18,6 +18,7 @@ class UserProfile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         print(f"Creating profile for user {instance.username}")
+        print(f"password profile for user {instance.password}")
         UserProfile.objects.create(user=instance)
 
 @receiver(post_save, sender=User)
