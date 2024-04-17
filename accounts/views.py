@@ -19,6 +19,11 @@ def cadastro(request):
     else:
         username = request.POST.get('username')
         email = request.POST.get('email')
+        name = request.POST.get('name')
+        profissao = request.POST.get('profissao')
+        sexo = request.POST.get('sexo')
+        pais = request.POST.get('pais')
+        city = request.POST.get('city')
         password = request.POST.get('password')
         
         user = User.objects.filter(username=username).first()
@@ -41,7 +46,7 @@ def login(request):
         user = authenticate(username=username, password=password)
         if user:
             login_django(request, user)
-            return render(request, 'index.html')
+            return redirect(reverse('index'))
         else:
             return HttpResponse('user ou senha invalida')
         

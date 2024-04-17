@@ -13,9 +13,11 @@ from plataforma.models import Products
 @login_required(login_url='')
 def index(request):
     mProducts = Products.objects.all().values()
+    mUser = User.objects.all().values()
     
     context = {
-        'mProducts': mProducts
+        'mProducts': mProducts,
+        'mUser': mUser,
     }
     
     template = loader.get_template('index.html')
