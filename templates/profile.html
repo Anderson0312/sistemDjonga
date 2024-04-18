@@ -49,7 +49,7 @@
                 {% if user.is_authenticated %}
                 <button class="btn btn-primary profile-button text-black m" type="button ">Save Profile</button>
             
-                <form action="{% url 'logout' %}" method="post">
+                <form action="{% url 'account_logout' %}" method="post">
                   {% csrf_token %}
                   <button class="btn btn-danger profile-button text-black" type="submit">Log Out</button>
                 </form>

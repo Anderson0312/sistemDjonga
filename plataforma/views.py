@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as login_django
+from django.shortcuts import render
 from django.template import loader
 
 from plataforma.models import Products
@@ -22,8 +23,8 @@ def index(request):
     
     return HttpResponse(template.render(context, request))
 
-@login_required(login_url='')
-def profile(request):
 
-    return 
+@login_required(login_url='/accounts/profile/')
+def profile(request):
+    return render(request, 'profile.html')
 
