@@ -6,12 +6,12 @@ from django.dispatch import receiver
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
     profissao = models.CharField(max_length=100)
     namecomplte = models.CharField(max_length=100)
     sexo = models.CharField(max_length=10)
     pais = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 
 @receiver(post_save, sender=User)
