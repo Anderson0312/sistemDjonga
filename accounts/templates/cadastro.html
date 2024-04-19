@@ -162,6 +162,14 @@
     </a>
     <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
 
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% endif %}
+
     <div class="form-floating">
       <input type="username" name="username" class="form-control" id="id_username" placeholder="username">
       <label for="floatingInput">Username</label>

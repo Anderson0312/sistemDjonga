@@ -32,7 +32,7 @@ def cadastro(request):
         user = User.objects.filter(username=username).first()
         
         if user:
-            return HttpResponse('Já existe um usuario com este username')
+            messages.error(request, 'Já existe um usuario com este username')
         else:
             user = User.objects.create_user(username=username, email=email, password=password)
             # Profile.objects.create(user=user, profissao=profissao, namecomplte=namecomplte, sexo=sexo, pais=pais, city=city)
