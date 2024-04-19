@@ -163,6 +163,15 @@
 
     <h1 class="h3 mb-3 fw-normal">Please your login</h1>
 
+    {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-danger">
+              {{ message }}
+          </div>
+      {% endfor %}
+    {% endif %}
+
+
     <div class="form-floating">
       <input type="text" name="username" class="form-control" for="id_username" placeholder="username">
       <label for="floatingInput">Username</label>
