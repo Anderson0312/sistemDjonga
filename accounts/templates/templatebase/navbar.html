@@ -323,9 +323,17 @@
               {% if user.is_authenticated %}
               <a class="nav-link d-flex align-items-center gap-2" href="/accounts/profile/">
                 <svg class="bi"><use xlink:href="#door-closed"/></svg>
-                 olá, {{user.username}}
-
+                 Olá, {{user.username}}
               </a>
+              <form action="{% url 'logout' %}" id="meuFormulario" method="post" >
+                
+                <a class="nav-link d-flex align-items-center gap-2" id="linkSubmit" type="submit">
+                  <svg class="bi"><use xlink:href="#door-closed"/></svg>
+                  {% csrf_token %}
+                  Log Out
+                </a>
+
+              </form>
               {% else %}
               <a class="nav-link d-flex align-items-center gap-2" href="../accounts/login/">
                 <svg class="bi"><use xlink:href="#door-closed"/></svg>
@@ -340,3 +348,9 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
+    <script>
+        document.getElementById('linkSubmit').addEventListener('click', function(event) {
+            event.preventDefault(); // Evita o comportamento padrão do link
+            document.getElementById('meuFormulario').submit(); // Submete o formulário
+        });
+    </script>

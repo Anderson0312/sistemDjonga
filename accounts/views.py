@@ -18,20 +18,25 @@ from accounts.models import UserProfile
 
 def cadastro(request):
     if request.method == "GET":
-            return render(request, 'cadastro.html')
-            
+            return render(request, 'cadastro.html')         
     else:
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
         
+        namecomplte = request.POST.get('name')
+        profissao = request.POST.get('profissao')
+        sexo = request.POST.get('sexo')
+        pais = request.POST.get('pais')
+        city = request.POST.get('city')
+        
+
         user = User.objects.filter(username=username).first()
         
         if user:
             messages.error(request, 'Já existe um usuario com este username')
         else:
             user = User.objects.create_user(username=username, email=email, password=password)
-            UserProfile.objects.create(user=user)
             return redirect(reverse('login'))
     
 
@@ -62,12 +67,21 @@ def profile(request):
         sexo = request.POST.get('sexo')
         pais = request.POST.get('pais')
         city = request.POST.get('city')
-        username = User.username
-
-        print(username)
-
-        UserProfile.objects.create(username=username, namecomplte=namecomplte, profissao=profissao, sexo=sexo, pais=pais,city=city)
+        usuario = request.user
         
+        # Buscar o UserProfile existente do usuário ou criar um novo
+        user_profile, created = UserProfile.objects.get_or_create(user=usuario)
+
+        # Atualizar os campos do UserProfile
+        user_profile.namecomplte = namecomplte
+        user_profile.profissao = profissao
+        user_profile.sexo = sexo
+        user_profile.pais = pais
+        user_profile.city = city
+
+        # Salvar as alterações no UserProfile
+        user_profile.save()
+
     return render(request, 'profile.html')
 
 

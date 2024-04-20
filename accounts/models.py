@@ -6,11 +6,11 @@ from django.dispatch import receiver
 
 
 class UserProfile(models.Model):
-    profissao = models.CharField(max_length=100)
-    namecomplte = models.CharField(max_length=100)
-    sexo = models.CharField(max_length=10)
-    pais = models.CharField(max_length=50)
-    city = models.CharField(max_length=50)
+    profissao = models.CharField(max_length=100, null=True)
+    namecomplte = models.CharField(max_length=100, null=True)
+    sexo = models.CharField(max_length=10, null=True)
+    pais = models.CharField(max_length=50, null=True)
+    city = models.CharField(max_length=50, null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 
@@ -18,7 +18,6 @@ class UserProfile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         print(f"Creating profile for user {instance.username}")
-        print(f"password profile for user {instance.password}")
         UserProfile.objects.create(user=instance)
 
 @receiver(post_save, sender=User)

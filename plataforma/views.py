@@ -14,11 +14,17 @@ from plataforma.models import Products
 def index(request):
     mProducts = Products.objects.all().values()
     mUser = User.objects.all().values()
+    mUserer = User.objects.all().values()
     
     context = {
         'mProducts': mProducts,
         'mUser': mUser,
     }
+    
+    if request.user.is_authenticated:
+        user_name = request.user
+        print(user_name.email)
+
     
     template = loader.get_template('index.html')
     
