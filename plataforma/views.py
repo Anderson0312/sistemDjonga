@@ -8,16 +8,15 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as login_django
 from django.template import loader
 
-from plataforma.models import Products
 
 @login_required(login_url='')
 def index(request):
-    mProducts = Products.objects.all().values()
+    # mProducts = Products.objects.all().values()
     mUser = User.objects.all().values()
     mUserer = User.objects.all().values()
     
     context = {
-        'mProducts': mProducts,
+        # 'mProducts': mProducts,
         'mUser': mUser,
     }
     

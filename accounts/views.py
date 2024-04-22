@@ -23,13 +23,7 @@ def cadastro(request):
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
-        
-        namecomplte = request.POST.get('name')
-        profissao = request.POST.get('profissao')
-        sexo = request.POST.get('sexo')
-        pais = request.POST.get('pais')
-        city = request.POST.get('city')
-        
+               
 
         user = User.objects.filter(username=username).first()
         
