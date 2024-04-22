@@ -8,6 +8,9 @@ from django.template import loader
 from products.forms import BuscaProdutoForm
 from products.models import Products
 
+from django.urls import reverse_lazy
+from django.views.generic import DeleteView
+
 # Create your views here.
 def cadastroProducts(request):
     if request.method == "GET":
@@ -26,8 +29,7 @@ def cadastroProducts(request):
             products = Products.objects.create(name=name, valor=valor, description=description, category=category)
             messages.success(request, 'Cadastrado com sucesso')
             return redirect(reverse('cadastroProducts'))
-        
-        
+                
 @login_required(login_url='')
 def viewProducts(request):
     mProducts = Products.objects.all().values()
@@ -53,4 +55,9 @@ def buscar_produto(request):
         form = BuscaProdutoForm()
     
     return render(request, 'buscar_produto.html', {'form': form})
+
+class ProdutoDeleteView(DeleteView):
+    model = Products
+    success_url = reverse_lazy('viewProducts')  # substitua pelo nome da sua URL
+    template_name = 'produto_confirm_delete.html'  # opcional: personalize o template
     
