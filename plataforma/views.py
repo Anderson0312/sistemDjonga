@@ -12,15 +12,14 @@ from django.template import loader
 @login_required(login_url='')
 def index(request):
     mUser = User.objects.all().values()
-    mUserer = User.objects.all().values()
     
     context = {
         'mUser': mUser,
     }
     
-    if request.user.is_authenticated:
-        user_name = request.user
-        print(user_name.email)
+    # if request.user.is_authenticated:
+    #     user_name = request.user
+    #     print(user_name.email)
 
     
     template = loader.get_template('index.html')

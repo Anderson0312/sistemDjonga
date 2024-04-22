@@ -12,7 +12,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DeleteView
 
 # Create your views here.
-def cadastroProducts(request):
+def cadastroProducts(request):   
     if request.method == "GET":
             return render(request, 'cadastroProducts.html')         
     else:
@@ -21,14 +21,15 @@ def cadastroProducts(request):
         description = request.POST.get('description')
         category = request.POST.get('category')
                       
-        user = Products.objects.filter(username=name).first()
+        product = Products.objects.filter(name=name).first()
         
-        if user:
+        if product:
             messages.error(request, 'Já existe um Produto com este nome cadastrado')
+            return redirect(reverse('viewProducts'))
         else:
             products = Products.objects.create(name=name, valor=valor, description=description, category=category)
             messages.success(request, 'Cadastrado com sucesso')
-            return redirect(reverse('cadastroProducts'))
+            return redirect(reverse('viewProducts'))
                 
 @login_required(login_url='')
 def viewProducts(request):
@@ -38,10 +39,11 @@ def viewProducts(request):
         'mProducts': mProducts,
     }
     
-
-    template = loader.get_template('viewProducts.html')
+    template = loader.get_template('cadastroProducts.html')
     
     return HttpResponse(template.render(context, request))
+
+
 
 @login_required(login_url='')
 def buscar_produto(request):
@@ -50,6 +52,7 @@ def buscar_produto(request):
         if form.is_valid():
             query = form.cleaned_data['query']
             produtos = Products.objects.filter(nome__icontains=query)
+            print(produtos)
             return render(request, 'resultado_busca.html', {'produtos': produtos, 'query': query})
     else:
         form = BuscaProdutoForm()
