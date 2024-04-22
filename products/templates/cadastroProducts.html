@@ -1,7 +1,5 @@
 {% load static %}
 
-{% include 'templatebase/navbar.html' %}
-
 <main class="form-signin w-100 m-auto">
     <form method="post" action="{% url 'cadastro' %}">
       {% csrf_token %}
@@ -19,31 +17,26 @@
       {% endif %}
   
       <div class="form-floating">
-        <input type="username" name="username" class="form-control" id="id_username" placeholder="username">
+        <input type="nameProd" name="nameProd" class="form-control" id="nameProd" placeholder="name product">
         <label for="floatingInput">Nome do produto</label>
       </div>
   
       <div class="form-floating mt-2">
-        <input type="email" name="email" class="form-control" id="id_email" placeholder="name@example.com">
+        <input type="valor" name="valor" class="form-control" id="id_valor" placeholder="10,56">
         <label for="floatingInput">Valor</label>
       </div>
       <div class="form-floating mt-2">
-        <input type="profissao" name="profissao" class="form-control" id="id_last_name" placeholder="last_name">
+        <input type="description" name="description" class="form-control" id="id_description" placeholder="description">
         <label for="floatingInput">description</label>
       </div>
 
       <div class="form-floating mt-2">
-        <input type="name" name="name" class="form-control" id="id_first_name" placeholder="first_name">
+        <input type="category" name="category" class="form-control" id="id_category" placeholder="category">
         <label for="floatingInput">categoria</label>
       </div>
-
   
       <button class="btn btn-primary w-100 py-2" type="submit" >Cadastrar</button>
       <p class="mt-5 mb-3 text-body-secondary">&copy; 2024</p>
     </form>
   
-  
   </main>
-  
-
-  {% include 'templatebase/footer.html' %}

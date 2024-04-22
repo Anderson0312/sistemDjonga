@@ -11,12 +11,10 @@ from django.template import loader
 
 @login_required(login_url='')
 def index(request):
-    # mProducts = Products.objects.all().values()
     mUser = User.objects.all().values()
     mUserer = User.objects.all().values()
     
     context = {
-        # 'mProducts': mProducts,
         'mUser': mUser,
     }
     
