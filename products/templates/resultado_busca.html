@@ -1,7 +1,7 @@
 <h2>Resultados para "{{ query }}"</h2>
 <ul>
     {% for produto in produtos %}
-        <li>{{ produto.nome }} - {{ produto.preco }}</li>
+        <li>{{ produto.name }} - {{ produto.valor }}</li>
     {% empty %}
         <li>Nenhum produto encontrado.</li>
     {% endfor %}

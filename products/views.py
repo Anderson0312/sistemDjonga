@@ -1,3 +1,4 @@
+from msilib.schema import ListView
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -10,6 +11,10 @@ from products.models import Products
 
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView
+
+from django.core.paginator import Paginator
+from django.core.paginator import EmptyPage
+from django.core.paginator import PageNotAnInteger
 
 # Create your views here.
 def cadastroProducts(request):   
@@ -44,14 +49,13 @@ def viewProducts(request):
     return HttpResponse(template.render(context, request))
 
 
-
 @login_required(login_url='')
 def buscar_produto(request):
     if request.method == 'GET':
         form = BuscaProdutoForm(request.GET)
         if form.is_valid():
             query = form.cleaned_data['query']
-            produtos = Products.objects.filter(nome__icontains=query)
+            produtos = Products.objects.filter(name__icontains=query)
             print(produtos)
             return render(request, 'resultado_busca.html', {'produtos': produtos, 'query': query})
     else:
@@ -63,4 +67,5 @@ class ProdutoDeleteView(DeleteView):
     model = Products
     success_url = reverse_lazy('viewProducts')  # substitua pelo nome da sua URL
     template_name = 'produto_confirm_delete.html'  # opcional: personalize o template
+    
     

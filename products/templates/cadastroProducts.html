@@ -58,15 +58,16 @@
             <th scope="col">funçaõ</th>
           </tr>
         </thead>
+        
         <tbody>
           <tr>
-            <td>{{x.id}}</td>
-            <td>{{x.name}}</td>
-            <td>{{x.valor}}</td>
-            <td>{{x.description}}</td>
-            <td>{{x.category}}</td>
+            <td scope="row">{{x.id}}</td>
+            <td >{{x.name}}</td>
+            <td >{{x.valor}}</td>
+            <td >{{x.description}}</td>
+            <td >{{x.category}}</td>
             <td>
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <button href="{% url 'produto_delete' x.id %}" type="button" class="btn btn-primary" data-target="#confirmDeleteModal" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Deletar
               </button>
             ou E</td>
@@ -75,7 +76,6 @@
       </table>
     </div>
     
-
 
     <form method="post" action="{% url 'produto_delete' x.id %}">
       {% csrf_token %}
@@ -102,6 +102,12 @@
 
     {% endfor %}
 
+{% include 'buscar_produto.html' %}
+
+{% include 'resultado_busca.html' %}
+
+<br>
+
 
 
   </main>
@@ -111,6 +117,36 @@
         event.preventDefault(); // Evita o comportamento padrão do link
         document.getElementById('meuFormulario').submit(); // Submete o formulário
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+    const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+
+    confirmDeleteBtn.addEventListener("click", function() {
+        // Obtenha o ID do produto do botão (supondo que você esteja usando Django para renderizar o template)
+        const productId = {{ x.id }};
+
+        // Envie uma solicitação POST para a URL de deleção
+        fetch(`/produto/${productId}/delete/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            body: JSON.stringify({
+                "csrfmiddlewaretoken": "{{ csrf_token }}"
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Redirecione para a página de listagem de produtos ou faça outra coisa
+            window.location.href = "{% url 'viewProducts' %}";
+        })
+        .catch(error => {
+            console.error("Erro ao deletar o produto:", error);
+        });
+      });
+    });
+    
 </script>
 
 
