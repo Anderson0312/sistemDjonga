@@ -38,10 +38,20 @@ def cadastroProducts(request):
                 
 @login_required(login_url='')
 def viewProducts(request):
+    query = request.GET.get('query')
+
+    if query:
+        mProducts = Products.objects.filter(name__icontains=query)
+    else:
+        mProducts = Products.objects.all()
+        
+    form = BuscaProdutoForm(initial={'query': query})
+    
     mProducts = Products.objects.all().values()
     
     context = {
         'mProducts': mProducts,
+        'form': form,
     }
     
     template = loader.get_template('cadastroProducts.html')
