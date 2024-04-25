@@ -1,5 +1,17 @@
 {% include 'templatebase/navbar.html' %}
 
+{% if user.userprofile.namecomplte == NULL %}
+<!-- Modal de Boas-Vindas -->
+<div class="alert alert-warning" role="alert">
+  <p>Complete o seu pefil clicando em <a class="alert-link" href="/accounts/profile/">aqui</a></p>
+</div>
+
+{% else %}
+<div class="alert alert-success" role="alert">
+  <P>Bem vindo {{user.userprofile.namecomplte}}</P>
+</div>
+
+{% endif%}
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Dashboard</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
@@ -19,7 +31,7 @@
       <h2>User</h2>
       {% for x in mUser %}
       <div class="table-responsive small">
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm table-bordered">
           <thead>
             <tr>
               <th scope="col">ID</th>
@@ -37,6 +49,8 @@
         </table>
       </div>
       {% endfor %}
+
+    
 
 
 {% include 'templatebase/footer.html' %}
