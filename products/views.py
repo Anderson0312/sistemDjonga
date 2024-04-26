@@ -30,6 +30,34 @@ def cadastroProducts(request):
             products = Products.objects.create(name=name, valor=valor, description=description, category=category)
             messages.success(request, 'Cadastrado com sucesso')
             return redirect(reverse('viewProducts'))
+        
+def editar_produto(request, produto_id=None):
+    produto = get_object_or_404(Products, id=produto_id) if produto_id else None
+    
+    if request.method == "GET":
+            return render(request, 'viewProducts.html')       
+    else:
+        id = request.POST.get('id')
+        name = request.POST.get('name')
+        valor = request.POST.get('valor')
+        description = request.POST.get('description')
+        category = request.POST.get('category')
+        
+        print(Products.id)
+
+        editar_produto = Products.objects.get_or_create(id=id)
+        
+        editar_produto.name = name
+        editar_produto.valor = valor
+        editar_produto.description = description
+        editar_produto.category = category
+        
+        editar_produto.save()
+        
+        
+    
+    
+    return render(request, 'editar_produto.html')
                 
 @login_required(login_url='')
 def viewProducts(request):
@@ -51,6 +79,7 @@ def viewProducts(request):
     }
     
     template = loader.get_template('cadastroProducts.html')
+    print(Products.id)
     
     return HttpResponse(template.render(context, request))
 
@@ -76,15 +105,3 @@ class ProdutoDeleteView(DeleteView):
     
     
 
-def editar_produto(request, produto_id=None):
-    produto = get_object_or_404(Products, id=produto_id) if produto_id else None
-    
-    if request.method == 'POST':
-        form = ProdutoForm(request.POST, instance=produto)
-        if form.is_valid():
-            form.save()
-            return redirect('editar_produto')
-    else:
-        form = ProdutoForm(instance=produto)
-    
-    return render(request, 'editar_produto.html', {'form': form, 'produto': produto})
