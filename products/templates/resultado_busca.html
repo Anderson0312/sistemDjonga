@@ -1,8 +1,14 @@
+
+{% if query %}
 <h2>Resultados para "{{ query }}"</h2>
-<ul>
-    {% for produto in produtos %}
-        <li>{{ produto.name }} - {{ produto.valor }}</li>
-    {% empty %}
-        <li>Nenhum produto encontrado.</li>
-    {% endfor %}
-</ul>
+{% else %}
+<h2>Todos os Produtos</h2>
+{% endif %}
+
+<ul class="list-group">
+{% for produto in mProducts %}
+    <li class="list-group-item">{{ produto.name }} - {{ produto.valor }}</li>
+{% empty %}
+    <li class="list-group-item">Nenhum produto encontrado.</li>
+{% endfor %}
+</ul> 

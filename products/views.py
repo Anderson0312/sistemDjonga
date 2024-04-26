@@ -1,6 +1,5 @@
-from msilib.schema import ListView
 from django.contrib import messages
-from django.shortcuts import redirect, render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -11,10 +10,6 @@ from products.models import Products
 
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView
-
-from django.core.paginator import Paginator
-from django.core.paginator import EmptyPage
-from django.core.paginator import PageNotAnInteger
 
 # Create your views here.
 def cadastroProducts(request):   
@@ -52,6 +47,7 @@ def viewProducts(request):
     context = {
         'mProducts': mProducts,
         'form': form,
+        'query': query,
     }
     
     template = loader.get_template('cadastroProducts.html')
@@ -79,3 +75,16 @@ class ProdutoDeleteView(DeleteView):
     template_name = 'produto_confirm_delete.html'  # opcional: personalize o template
     
     
+
+def editar_produto(request, produto_id=None):
+    produto = get_object_or_404(Products, id=produto_id) if produto_id else None
+    
+    if request.method == 'POST':
+        form = ProdutoForm(request.POST, instance=produto)
+        if form.is_valid():
+            form.save()
+            return redirect('editar_produto')
+    else:
+        form = ProdutoForm(instance=produto)
+    
+    return render(request, 'editar_produto.html', {'form': form, 'produto': produto})
