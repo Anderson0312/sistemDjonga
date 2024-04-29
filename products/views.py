@@ -32,32 +32,40 @@ def cadastroProducts(request):
             return redirect(reverse('viewProducts'))
         
 def editar_produto(request, produto_id=None):
-    produto = get_object_or_404(Products, id=produto_id) if produto_id else None
+    # Fetch the product if editing an existing one
+    if produto_id:
+        produto = get_object_or_404(Products, id=produto_id)
+    else:
+        produto = None
     
     if request.method == "GET":
             return render(request, 'viewProducts.html')       
     else:
-        id = request.POST.get('id')
         name = request.POST.get('name')
         valor = request.POST.get('valor')
         description = request.POST.get('description')
         category = request.POST.get('category')
+        # If editing an existing product, update its attributes
+        if produto:
+            produto.name = name
+            produto.valor = valor
+            produto.description = description
+            produto.category = category
+            produto.save()
+        else:
+            # If adding a new product, create a new object and save it
+            produto = Products.objects.create(name=name, valor=valor, description=description, category=category)
         
-        print(Products.id)
-
-        editar_produto = Products.objects.get_or_create(id=id)
         
-        editar_produto.name = name
-        editar_produto.valor = valor
-        editar_produto.description = description
-        editar_produto.category = category
+        print('produto.id')
+        print(produto)
         
-        editar_produto.save()
+        # produto.save()
         
         
     
     
-    return render(request, 'editar_produto.html')
+    return redirect(reverse('viewProducts'))
                 
 @login_required(login_url='')
 def viewProducts(request):

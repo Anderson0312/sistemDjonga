@@ -53,9 +53,10 @@
     </form>
   </div>
   {% for product in mProducts %}
-  <div id="formulario-edicao"  aria-hidden="true">
-    <form method="post"  action="{% url 'editar_produto' product.id %}"  id="confirmEdit{{ product.id }}">
+  <div id="formulario-edicao" >
+    <form method="post"  action="{% url 'editar_produto' product.id %}">
       {% csrf_token %}
+      <div aria-hidden="true"  id="confirmEdit{{ product.id }}" tabindex="-1">
       <a class="nav-link d-flex align-items-center gap-2" href="/plataforma/index">
         <img class="mb-4" src="{% static '/brand/bootstrap-logo.svg' %}" alt="" width="72" height="57">
       </a>
@@ -70,11 +71,11 @@
       {% endif %}
   
       <div class="form-floating">
-        <input type="nameProd" name="id" class="form-control" id="id" placeholder="{{product.id}}">
-        <label for="floatingInput">{{product.id}}</label>
+        <input type="nameProd" name="id" class="form-control" id="productId" value="{{ product.id }}" disabled="">
+        <label for="floatingInput">ID</label>
       </div>
       <div class="form-floating">
-        <input type="nameProd" name="nameProd" class="form-control" id="nameProd" placeholder="name product">
+        <input type="name" name="name" class="form-control" id="name" placeholder="name product">
         <label for="floatingInput">Nome do produto</label>
       </div>
   
@@ -94,6 +95,7 @@
   
       <button class="btn btn-primary w-100 py-2 mt-2" type="submit" >Editar</button>
       <button type="button" class="btn w-100 py-2 mt-2 btn-success" onclick="mostrarFormularioCadastro()">Cadastrar Produto</button>
+    </div>
     </form>
   </div>
 
@@ -125,7 +127,7 @@
                             Deletar
                         </button>
                         ou 
-                        <button type="button" data-bs-target="#confirmEdit{{ product.id }}" data-product-id="{{ product.id }}" class="btn btn-warning" onclick="mostrarFormularioEdicao()">Editar Produto</button>
+                        <button data-product-id="{{ product.id }}" type="button" data-bs-target="#confirmEdit{{ product.id }}" class="btn btn-warning" onclick="mostrarFormularioEdicao()">Editar Produto</button>
                     </td>
                 </tr>
             </tbody>
@@ -190,6 +192,8 @@
         formularioCadastro.style.display = 'block';
         formularioEdicao.style.display = 'none';
     }
+
+    // document.getElementById("productId").value = '';
 </script>
 
 
