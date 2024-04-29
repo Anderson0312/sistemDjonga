@@ -54,48 +54,49 @@
   </div>
   {% for product in mProducts %}
   <div id="formulario-edicao" >
-    <form method="post"  action="{% url 'editar_produto' product.id %}">
+    <form method="post" action="" id="edicaoForm">
       {% csrf_token %}
-      <div>
       <a class="nav-link d-flex align-items-center gap-2" href="/plataforma/index">
         <img class="mb-4" src="{% static '/brand/bootstrap-logo.svg' %}" alt="" width="72" height="57">
       </a>
       <h1 class="h3 mb-3 fw-normal">Edição de produto</h1>
-  
-      {% if messages %}
-      {% for message in messages %}
-          <div class="alert alert-success">
-              {{ message }}
-          </div>
-      {% endfor %}
-      {% endif %}
-  
+    
       <div class="form-floating" >
         <input  type="id" name="id" class="form-control" id="productId"  disabled="">
         <label for="floatingInput">ID</label>
       </div>
       <div class="form-floating">
-        <input type="name" name="name" class="form-control" id="name" placeholder="name product">
+        <input type="name" name="name" class="form-control" id="name" placeholder="name product" required>
         <label for="floatingInput">Nome do produto</label>
+        <div class="invalid-feedback">
+          Por favor, preencha este campo.
+      </div>
       </div>
   
       <div class="form-floating mt-2">
-        <input type="valor" name="valor" class="form-control" id="id_valor" placeholder="10,56">
+        <input type="valor" name="valor" class="form-control" id="id_valor" placeholder="10,56" required>
         <label for="floatingInput">Valor</label>
+        <div class="invalid-feedback">
+          Por favor, preencha este campo.
+      </div>
       </div>
       <div class="form-floating mt-2">
-        <input type="description" name="description" class="form-control" id="id_description" placeholder="description">
+        <input type="description" name="description" class="form-control" id="id_description" placeholder="description" required>
         <label for="floatingInput">description</label>
+        <div class="invalid-feedback">
+          Por favor, preencha este campo.
+      </div>
       </div>
 
       <div class="form-floating mt-2">
-        <input type="category" name="category" class="form-control" id="id_category" placeholder="category">
+        <input type="category" name="category" class="form-control" id="id_category" placeholder="category" required>
         <label for="floatingInput">categoria</label>
+        <div class="invalid-feedback">
+          Por favor, preencha este campo.
       </div>
-  
+      </div>
       <button class="btn btn-primary w-100 py-2 mt-2" type="submit" >Editar</button>
       <button type="button" class="btn w-100 py-2 mt-2 btn-success" onclick="mostrarFormularioCadastro()">Cadastrar Produto</button>
-    </div>
     </form>
   </div>
 
@@ -127,7 +128,7 @@
                             Deletar
                         </button>
                         ou 
-                        <button data-product-id="{{ product.id }}" type="button" data-bs-target="#confirmEdit{{ product.id }}" class="btn btn-warning" onclick="mostrarFormularioEdicao()">Editar Produto</button>
+                        <button data-product-id="{{ product.id }}" type="button"  class="btn btn-warning" onclick="mostrarFormularioEdicao()">Editar Produto</button>
                     </td>
                 </tr>
             </tbody>
@@ -186,10 +187,14 @@
             // Obtém o ID do produto do botão clicado
         const productId = event.target.getAttribute('data-product-id');
 
-        // Agora você pode usar o valor do ID conforme necessário (por exemplo, enviar para o servidor via AJAX).
-        console.log(`ID do produto: ${productId}`);
-
         document.getElementById('productId').value = productId
+
+        // Construa a URL com o valor de productId
+        var url = "{% url 'editar_produto' %}" + productId + '/';
+
+        // Defina a URL como a ação do formulário
+        document.getElementById('edicaoForm').action = url;
+
     }
 
     function mostrarFormularioCadastro() {
@@ -201,6 +206,27 @@
         formularioEdicao.style.display = 'none';
     }
 
+    // Espera o carregamento do DOM
+    document.addEventListener('DOMContentLoaded', function () {
+        // Captura o formulário
+        var form = document.getElementById('myForm');
+
+        // Adiciona um event listener para o envio do formulário
+        form.addEventListener('submit', function (event) {
+            // Captura o campo
+            var campo = document.getElementById('campo');
+
+            // Verifica se o campo está preenchido
+            if (!campo.value) {
+                // Se não estiver preenchido, previne o envio do formulário
+                event.preventDefault();
+                // Adiciona classes do Bootstrap para indicar campo inválido
+                campo.classList.add('is-invalid');
+            }
+        });
+    });
+
+    
 </script>
 
 

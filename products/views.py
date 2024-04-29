@@ -23,13 +23,17 @@ def cadastroProducts(request):
                       
         product = Products.objects.filter(name=name).first()
         
-        if product:
-            messages.error(request, 'Já existe um Produto com este nome cadastrado')
+        if name == "":
+            messages.error(request,'Cadastre pelo menos o nome do produto para finalizar')
             return redirect(reverse('viewProducts'))
-        else:
-            products = Products.objects.create(name=name, valor=valor, description=description, category=category)
-            messages.success(request, 'Cadastrado com sucesso')
-            return redirect(reverse('viewProducts'))
+        else:   
+            if product:
+                messages.error(request, 'Já existe um Produto com este nome cadastrado')
+                return redirect(reverse('viewProducts'))
+            else:
+                products = Products.objects.create(name=name, valor=valor, description=description, category=category)
+                messages.success(request, 'Cadastrado com sucesso')
+                return redirect(reverse('viewProducts'))
         
 def editar_produto(request, produto_id=None):
     # Fetch the product if editing an existing one
@@ -37,35 +41,33 @@ def editar_produto(request, produto_id=None):
         produto = get_object_or_404(Products, id=produto_id)
     else:
         produto = None
-    
+  
     if request.method == "GET":
             return render(request, 'viewProducts.html')       
     else:
-        produtoid=request.POST.get('id')
         name = request.POST.get('name')
         valor = request.POST.get('valor')
         description = request.POST.get('description')
         category = request.POST.get('category')
-        # If editing an existing product, update its attributes
-        if produto:
-            produto.name = name
-            produto.valor = valor
-            produto.description = description
-            produto.category = category
-            produto.save()
+        
+        if name == "" and valor == "" and description == "" and category == "":
+            # Redirecionar de volta para a mesma página
+            return redirect(reverse('viewProducts'))
         else:
-            # If adding a new product, create a new object and save it
-            produto = Products.objects.create(name=name, valor=valor, description=description, category=category)
-        
-        
-        print('produto.id')
-        print(produtoid)
-        
-        # produto.save()
-        
-        
-    
-    
+            # If editing an existing product, update its attributes
+            if produto:
+                produto.name = name
+                produto.valor = valor
+                produto.description = description
+                produto.category = category
+                produto.save()
+            else:
+                # If adding a new product, create a new object and save it
+                produto = Products.objects.create(name=name, valor=valor, description=description, category=category)  
+            
+            print('produto.id')
+            print(produto_id)
+            
     return redirect(reverse('viewProducts'))
                 
 @login_required(login_url='')

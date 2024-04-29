@@ -259,12 +259,14 @@
                 Products
               </a>
             </li>
+            
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
+              <a class="nav-link d-flex align-items-center gap-2" href="/custommers/client">
                 <svg class="bi"><use xlink:href="#people"/></svg>
                 Customers
               </a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-2" href="#">
                 <svg class="bi"><use xlink:href="#graph-up"/></svg>
@@ -315,12 +317,14 @@
           <hr class="my-3">
 
           <ul class="nav flex-column mb-auto">
+            {% if user.is_superuser %}
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-2" href="#">
                 <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg>
                 Settings
               </a>
             </li>
+            {% endif%}
             <li class="nav-item">
               {% if user.is_authenticated %}
               <a class="nav-link d-flex align-items-center gap-2" href="/accounts/profile/">
