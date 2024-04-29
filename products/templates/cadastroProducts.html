@@ -56,7 +56,7 @@
   <div id="formulario-edicao" >
     <form method="post"  action="{% url 'editar_produto' product.id %}">
       {% csrf_token %}
-      <div aria-hidden="true"  id="confirmEdit{{ product.id }}" tabindex="-1">
+      <div>
       <a class="nav-link d-flex align-items-center gap-2" href="/plataforma/index">
         <img class="mb-4" src="{% static '/brand/bootstrap-logo.svg' %}" alt="" width="72" height="57">
       </a>
@@ -70,8 +70,8 @@
       {% endfor %}
       {% endif %}
   
-      <div class="form-floating">
-        <input type="nameProd" name="id" class="form-control" id="productId" value="{{ product.id }}" disabled="">
+      <div class="form-floating" >
+        <input  type="nameProd" name="id" class="form-control" id="productId"  disabled="">
         <label for="floatingInput">ID</label>
       </div>
       <div class="form-floating">
@@ -182,6 +182,14 @@
         // Mostrar formulário de edição e ocultar formulário de cadastro
         formularioEdicao.style.display = 'block';
         formularioCadastro.style.display = 'none';
+
+            // Obtém o ID do produto do botão clicado
+        const productId = event.target.getAttribute('data-product-id');
+
+        // Agora você pode usar o valor do ID conforme necessário (por exemplo, enviar para o servidor via AJAX).
+        console.log(`ID do produto: ${productId}`);
+
+        document.getElementById('productId').value = productId
     }
 
     function mostrarFormularioCadastro() {
@@ -193,7 +201,6 @@
         formularioEdicao.style.display = 'none';
     }
 
-    // document.getElementById("productId").value = '';
 </script>
 
 
