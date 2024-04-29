@@ -41,6 +41,7 @@ def editar_produto(request, produto_id=None):
     if request.method == "GET":
             return render(request, 'viewProducts.html')       
     else:
+        produtoid=request.POST.get('id')
         name = request.POST.get('name')
         valor = request.POST.get('valor')
         description = request.POST.get('description')
@@ -58,7 +59,7 @@ def editar_produto(request, produto_id=None):
         
         
         print('produto.id')
-        print(produto)
+        print(produtoid)
         
         # produto.save()
         
