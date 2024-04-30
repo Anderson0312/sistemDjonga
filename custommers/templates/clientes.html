@@ -21,13 +21,35 @@
     
         <div class="row">
             <div class="col form-floating mt-2">
-                <input type="text" name="Address" class="form-control" id="id_Address" placeholder="First name">
-                <label for="floatingInput" class="ml-2 mr-2">First name</label>
+                <input type="first_name" name="first_name" class="form-control" id="id_first_name" placeholder="First name">
+                <label for="floatingInput" class="ms-2">First name</label>
             </div>
             <div class="col form-floating mt-2">
-                <input type="Address" name="Address" class="form-control" id="id_Address" placeholder="Address">
-                <label for="floatingInput">Last name</label>
+                <input type="last_name" name="last_name" class="form-control" id="id_last_name" placeholder="Last name">
+                <label for="floatingInput" class="ms-2">Last name</label>
             </div>
+        </div>
+
+        <div class="form-floating mt-2">
+          <input type="email" name="email" class="form-control" id="id_email" placeholder="email">
+          <label for="floatingInput">Email</label>
+        </div>
+        <div class="row align-items-center ">
+        <div class="form-floating mt-2 col-md-6">
+          <input type="phone" name="phone" class="form-control" id="id_phone" placeholder="phone">
+          <label for="floatingInput "class="ms-2">Phone</label>
+        </div>
+        <div class="col-md-6 ">
+            <select id="inputState" class="form-select">
+              <option selected>Sexo</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Feminino">Feminino</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-floating mt-2">
+          <input type="profissao" name="profissao" class="form-control" id="id_profissao" placeholder="profissao">
+          <label for="floatingInput">Profissao</label>
         </div>
 
         <div class="form-floating mt-2">
@@ -35,10 +57,16 @@
             <label for="floatingInput">Address</label>
         </div>
 
-        <div class="form-floating mt-2">
-          <input type="category" name="category" class="form-control" id="id_category" placeholder="category">
-          <label for="floatingInput">categoria</label>
-        </div>
+        <div class="row ">
+            <div class="form-floating col mt-2">
+                <input type="city" name="city" class="form-control" id="id_city" placeholder="city">
+                <label for="floatingInput " class="ms-2">City</label>
+              </div>
+              <div class="form-floating col mt-2">
+                <input type="cep" name="cep" class="form-control" id="id_cep" placeholder="Cep">
+                <label for="floatingInput" class="ms-2">Cep</label>
+              </div>
+          </div>
     
         <button class="btn btn-success w-100 py-2 mt-2" type="submit" >Cadastrar</button>
       </form>
@@ -99,11 +127,14 @@
               <thead>
                   <tr>
                       <th scope="col">ID</th>
-                      <th scope="col">Name Cliente</th>
-                      <th scope="col">Valor</th>
-                      <th scope="col">Description</th>
-                      <th scope="col">Category</th>
-                      <th scope="col">Function</th>
+                      <th scope="col">first name</th>
+                      <th scope="col">email</th>
+                      <th scope="col">phone</th>
+                      <th scope="col">profissao</th>
+                      <th scope="col">sexo</th>
+                      <th scope="col">address</th>
+                      <th scope="col">city</th>
+                      <th scope="col">cep</th>
                   </tr>
               </thead>
               <tbody>
