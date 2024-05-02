@@ -3,12 +3,14 @@ from unittest import loader
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
 
 from custommers.models import custommer
 
 # Create your views here.
+@login_required(login_url='')
 def create_custommmer(request):
     if request.method == "GET":
             return render(request, 'clientes.html')         
@@ -30,3 +32,28 @@ def create_custommmer(request):
         else:
             client = custommer.objects.create(first_name=first_name, last_name=last_name, email=email, phone=phone, profissao=profissao, sexo=sexo, address=address, city=city, cep=cep)
             return redirect(reverse('client'))
+        
+              
+@login_required(login_url='')
+def viewCustommer(request):
+    query = request.GET.get('query')
+
+    if query:
+        mCustommer = custommer.objects.filter(name__icontains=query)
+    else:
+        mCustommer = custommer.objects.all()
+        
+    # form = BuscaProdutoForm(initial={'query': query})
+    
+    mCustommer = custommer.objects.all().values()
+    
+    context = {
+        'mCustommer': mCustommer,
+        # 'form': form,
+        'query': query,
+    }
+    
+    template = loader.get_template('clienteview.html')
+    print(custommer.id)
+    
+    return HttpResponse(template.render(context, request))

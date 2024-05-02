@@ -5,5 +5,6 @@ from custommers import views
 
 urlpatterns = [
     path('client/', views.create_custommmer, name='client'),
+    path('clientview/', views.viewCustommer, name='clientview'),
     
 ]
