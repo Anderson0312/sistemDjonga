@@ -4,9 +4,11 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.template import loader
 
 from django.contrib import messages
 
+from custommers.forms import BuscaClientForm
 from custommers.models import custommer
 
 # Create your views here.
@@ -43,7 +45,7 @@ def viewCustommer(request):
     else:
         mCustommer = custommer.objects.all()
         
-    # form = BuscaProdutoForm(initial={'query': query})
+    form = BuscaClientForm(initial={'query': query})
     
     mCustommer = custommer.objects.all().values()
     
@@ -57,3 +59,19 @@ def viewCustommer(request):
     print(custommer.id)
     
     return HttpResponse(template.render(context, request))
+
+
+
+@login_required(login_url='')
+def buscar_Cliente(request):
+    if request.method == 'GET':
+        form = BuscaClientForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            custommers = custommer.objects.filter(first_name__icontains=query)
+            print(custommers)
+            return render(request, 'resultado_busca.html', {'custommers': custommers, 'query': query})
+    else:
+        form = BuscaClientForm()
+    
+    return render(request, 'buscar_cliente.html', {'form': form})

@@ -25,10 +25,10 @@
             <tbody>
                 <tr>
                     <td scope="row">{{ custommer.id }}</td>
+                    <td>{{ custommer.first_name }}</td>
                     <td>{{ custommer.email }}</td>
                     <td>{{ custommer.phone }}</td>
-                    <td>{{ custommer.first name }}</td>
-                    <td>{{ custommer.city }}</td>
+                    <td>{{ custommer.profissao }}</td>
                     <td>
                         <button data-product-id="{{ custommer.id }}" type="button" class="btn btn-danger"
                                 data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ custommer.id }}">

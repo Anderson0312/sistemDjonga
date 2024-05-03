@@ -52,7 +52,7 @@
       <button class="btn btn-success w-100 py-2 mt-2" type="submit" >Cadastrar</button>
     </form>
   </div>
-  {% for product in mProducts %}
+
   <div id="formulario-edicao" >
     <form method="post" action="" id="edicaoForm">
       {% csrf_token %}
@@ -100,9 +100,10 @@
     </form>
   </div>
 
+
     <br>
-    <h2>Products</h2>
-    
+    <h2 class="fw-normal">Products</h2>
+    {% for product in mProducts %}
     <div class="table-responsive small">
         <table class="table table-striped table-sm">
             <thead>
