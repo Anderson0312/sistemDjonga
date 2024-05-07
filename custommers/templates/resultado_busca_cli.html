@@ -1,0 +1,25 @@
+{% load static %}
+{% include 'templatebase/navbar.html' %}
+
+
+
+
+{% if query %}
+<h2>Resultados para "{{ query }}"</h2>
+
+<ul class="list-group">
+    {% for customer  in custommers  %}
+        <li>{{ customer.first_name }} {{ customer.last_name }} - {{ customer.email }}</li>
+    {% empty %}
+        <li class="list-group-item">Nenhum cliente encontrado.</li>
+    {% endfor %}
+    </ul> 
+{% else %}
+
+<h2>Todos os Clientes</h2>
+{% endif %}
+
+
+
+
+{% include 'templatebase/footer.html' %}

@@ -1,7 +1,15 @@
+{% load static %}
+{% include 'templatebase/navbar.html' %}
+
+
 <form method="GET" class="form-inline">
+    {% csrf_token %}
     <div class="form-group">
-        {{ form.query.label_tag }}
-        {{ form.query }}
+        {{ form }}
     </div>
     <button type="submit" class="btn btn-primary">Buscar</button>
 </form>
+
+
+
+{% include 'templatebase/footer.html' %}

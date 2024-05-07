@@ -10,3 +10,7 @@ class custommer(models.Model):
     address = models.CharField(max_length=50, null=True)
     city = models.CharField(max_length=50, null=True)
     cep = models.CharField(max_length=50, null=True)
+
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"

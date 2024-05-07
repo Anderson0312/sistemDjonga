@@ -1,12 +1,12 @@
 {% load static %}
 {% include 'templatebase/navbar.html' %}
 
-<main class="form-signin w-100 m-auto">
+<main class="form-signin w-100 h-100 m-auto">
     <br>
     <h2>Cliente</h2>
     
-    {% for custommer in mCustommer %}
 
+    {% for custommer in mCustommer %}
     <div class="table-responsive small">
         <table class="table table-striped table-sm">
             <thead>
@@ -17,15 +17,17 @@
                     <th scope="col">phone</th>
                     <th scope="col">profissao</th>
                     <th scope="col">sexo</th>
-                    <th scope="col">address</th>
+                    <!-- <th scope="col">address</th>
                     <th scope="col">city</th>
-                    <th scope="col">cep</th>
+                    <th scope="col">cep</th> -->
                 </tr>
             </thead>
+            
             <tbody>
+               
                 <tr>
                     <td scope="row">{{ custommer.id }}</td>
-                    <td>{{ custommer.first_name }}</td>
+                    <td >{{ custommer.first_name }}</td>
                     <td>{{ custommer.email }}</td>
                     <td>{{ custommer.phone }}</td>
                     <td>{{ custommer.profissao }}</td>

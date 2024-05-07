@@ -32,6 +32,7 @@ def create_custommmer(request):
         if client:
             messages.error(request, 'Já existe um usuario com este cliente')
         else:
+            messages.success(request, 'Cliente cadastrado com sucesso')
             client = custommer.objects.create(first_name=first_name, last_name=last_name, email=email, phone=phone, profissao=profissao, sexo=sexo, address=address, city=city, cep=cep)
             return redirect(reverse('client'))
         
@@ -70,7 +71,8 @@ def buscar_Cliente(request):
             query = form.cleaned_data['query']
             custommers = custommer.objects.filter(first_name__icontains=query)
             print(custommers)
-            return render(request, 'resultado_busca.html', {'custommers': custommers, 'query': query})
+            print('linha73')
+            return render(request, 'resultado_busca_cli.html', {'custommers': custommers, 'query': query})
     else:
         form = BuscaClientForm()
     
