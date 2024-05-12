@@ -49,6 +49,6 @@ Este projeto está licenciado sob a [Licença MIT](https://github.com/Anderson03
 
 Para qualquer dúvida ou questão relacionada a este projeto, você pode entrar em contato com o mantenedor do repositório:
 
-* Anderson Moura
+* Anderson Moura Nasc
 * Email: [andersonmouranst@email.com](mailto:andersonmouranst@email.com)
 * LinkedIn: [https://www.linkedin.com/in/anderson-moura-126202224/](https://www.linkedin.com/in/anderson-moura-126202224/)
