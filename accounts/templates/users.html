@@ -12,15 +12,12 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">first name</th>
-                    <th scope="col">Last name</th>
+                    <th scope="col">Name</th>
                     <th scope="col">email</th>
-                    <th scope="col">phone</th>
                     <th scope="col">profissao</th>
                     <th scope="col">sexo</th>
                     <th scope="col">address</th>
                     <th scope="col">city</th>
-                    <th scope="col">cep</th>
                 </tr>
             </thead>
             
@@ -28,15 +25,12 @@
                 {% for User in mUser %}
                 <tr>
                     <td scope="row"><a class='nav-link link-primary fw-semibold' href="">{{ User.id }}</a></td>
-                    <td >{{ User.first_name }}</td>
-                    <td>{{ User.last_name }}</td>
+                    <td >{{ User.namecomplte }}</td>
                     <td>{{ User.email }}</td>
-                    <td>{{ User.phone }}</td>
                     <td>{{ User.profissao }}</td>
                     <td>{{User.sexo}}</td>
-                    <td>{{User.address}}</td>  
+                    <td>{{User.pais}}</td>  
                     <td>{{User.city}}</td>
-                    <td>{{User.cep}}</td>  
                 </tr>
                 {% endfor %}
             </tbody>

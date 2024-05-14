@@ -85,14 +85,20 @@ def logout(request):
     return render(request, 'login.html')
 
 @login_required(login_url='')
-def users(request):
+def users(request):   
+    # Buscar o UserProfile existente do usuário ou criar um novo
+    mUseP = UserProfile.objects.all().values()
+    
     mUser = User.objects.all().values()
     
+    print(mUseP)
+    
     context = {
-        'mUser': mUser,
+        'mUser': mUseP,
+        # 'mUser': mUser,
     }
     
-    
+
     template = loader.get_template('users.html')
     
     return HttpResponse(template.render(context, request))
