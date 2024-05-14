@@ -129,10 +129,11 @@
                     <td>
                         <button data-product-id="{{ product.id }}" type="button" class="btn btn-danger"
                                 data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ product.id }}">
-                            Deletar
+                                <i class="bi bi-trash3"></i>
+                            
                         </button>
-                        ou 
-                        <button data-product-id="{{ product.id }}" type="button"  class="btn btn-warning" onclick="mostrarFormularioEdicao()">Editar Produto</button>
+
+                        <button data-product-id="{{ product.id }}" type="button"  class="btn btn-warning" onclick="mostrarFormularioEdicao()">Editar<i class="bi bi-pencil-square"></i></button>
                     </td>
                 </tr>
                 <form method="post" action="{% url 'produto_delete' product.id %}">

@@ -1,3 +1,4 @@
+from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 
 from django.shortcuts import render
@@ -82,6 +83,21 @@ def profile(request):
 @login_required(login_url='/accounts/logout/')
 def logout(request):
     return render(request, 'login.html')
+
+@login_required(login_url='')
+def users(request):
+    mUser = User.objects.all().values()
+    
+    context = {
+        'mUser': mUser,
+    }
+    
+    
+    template = loader.get_template('users.html')
+    
+    return HttpResponse(template.render(context, request))
+
+
 
  
         
