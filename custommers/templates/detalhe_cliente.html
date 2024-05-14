@@ -1,0 +1,26 @@
+{% load static %}
+{% include 'templatebase/navbar.html' %}
+
+
+  <div class="container mt-4">
+    <h3 class="display-4">Detalhes do Cliente</h3>
+
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title"></h3>
+        <p class="card-text">ID: <strong>{{ cliente.id }}</strong></p>
+        <p class="card-text">Nome: {{ cliente.first_name}} {{ cliente.last_name }}</p>
+        <p class="card-text">Email: {{ cliente.email }}</p>
+        <p class="card-text">Telefone: {{ cliente.phone }}</p>
+        <p class="card-text">Profissão:  {{ cliente.profissao }}</p>
+        <p class="card-text">Cidade:  {{ cliente.city }}</p>
+        <p class="card-text">Cep: {{ cliente.cep }}</p>
+      </div>
+    </div>
+
+    <a href="../../clientview/" class="btn btn-secondary mt-3">Voltar para a Lista de Clientes</a>
+  </div>
+
+
+
+{% include 'templatebase/footer.html' %}

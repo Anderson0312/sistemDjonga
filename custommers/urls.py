@@ -6,5 +6,6 @@ from custommers import views
 urlpatterns = [
     path('client/', views.create_custommmer, name='client'),
     path('clientview/', views.viewCustommer, name='clientview'),
+    path('detalhe/<int:cliente_id>/', views.detalhe_cliente, name='detalhe_cliente'),
     path('buscar/', views.buscar_Cliente, name='buscar_cliente'),
 ]

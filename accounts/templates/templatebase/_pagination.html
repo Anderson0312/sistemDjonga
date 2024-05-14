@@ -1,0 +1,17 @@
+{% for objeto in dados_paginados %}
+    {# Renderize os dados do objeto aqui #}
+{% endfor %}
+
+<div class="pagination">
+    {% if dados_paginados.has_previous %}
+        <a href="?page=1">&laquo; Primeira</a>
+        <a href="?page={{ dados_paginados.previous_page_number }}">Anterior</a>
+    {% endif %}
+
+    <span class="current">Página {{ dados_paginados.number }} de {{ dados_paginados.paginator.num_pages }}</span>
+
+    {% if dados_paginados.has_next %}
+        <a href="?page={{ dados_paginados.next_page_number }}">Próxima</a>
+        <a href="?page={{ dados_paginados.paginator.num_pages }}">Última &raquo;</a>
+    {% endif %}
+</div>
