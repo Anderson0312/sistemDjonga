@@ -92,8 +92,8 @@ def users(request):
     mUser = User.objects.all().values()
     
     context = {
-        'mUser': mUseP,
-        # 'mUser': mUser,
+        'mUserP': mUseP,
+        'mUser': mUser,
     }
     
 

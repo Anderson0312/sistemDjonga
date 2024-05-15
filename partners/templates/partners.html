@@ -1,0 +1,93 @@
+{% load static %}
+{% include 'templatebase/navbar.html' %}
+
+<br>
+
+
+<main class="form-signin w-100 m-auto">
+    <div id="formulario-cadastro">
+      <form method="post" action="" >
+        {% csrf_token %}
+        <a class="nav-link d-flex align-items-center gap-2" href="/plataforma/index">
+          <img class="mb-4" src="{% static '/brand/bootstrap-logo.svg' %}" alt="" width="72" height="57">
+        </a>
+        <h1 class="h3 mb-3 fw-normal">Cadastro de Parceiros</h1>
+    
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% endif %}
+    
+        <div class="row">
+            <div class="col form-floating mt-2">
+                <input type="name_empresa" name="name_empresa" class="form-control" id="name_empresa" placeholder="Nome da empresa">
+                <label for="floatingInput" class="ms-2">Nome da Empresa</label>
+            </div>
+            <div class="col form-floating mt-2">
+                <input type="pathbase" name="pathbase" class="form-control" id="pathbase" placeholder="Last name">
+                <label for="floatingInput" class="ms-2">pathbase</label>
+            </div>
+        </div>
+    
+        <button class="btn btn-success w-100 py-2 mt-2" type="submit" >Cadastrar</button>
+      </form>
+    </div>
+<!-- 
+    <div id="formulario-edicao" >
+      <form method="post" action="" id="edicaoForm">
+        {% csrf_token %}
+        <a class="nav-link d-flex align-items-center gap-2" href="/plataforma/index">
+          <img class="mb-4" src="{% static '/brand/bootstrap-logo.svg' %}" alt="" width="72" height="57">
+        </a>
+        <h1 class="h3 mb-3 fw-normal">Edição de Cliente</h1>
+      
+        <div class="form-floating" >
+          <input  type="id" name="id" class="form-control" id="productId"  disabled="">
+          <label for="floatingInput">ID</label>
+        </div>
+        <div class="form-floating">
+          <input type="name" name="name" class="form-control" id="name" placeholder="name product" required>
+          <label for="floatingInput">Nome do Cliente</label>
+          <div class="invalid-feedback">
+            Por favor, preencha este campo.
+        </div>
+        </div>
+    
+        <div class="form-floating mt-2">
+          <input type="valor" name="valor" class="form-control" id="id_valor" placeholder="10,56" required>
+          <label for="floatingInput">Valor</label>
+          <div class="invalid-feedback">
+            Por favor, preencha este campo.
+        </div>
+        </div>
+        <div class="form-floating mt-2">
+          <input type="description" name="description" class="form-control" id="id_description" placeholder="description" required>
+          <label for="floatingInput">description</label>
+          <div class="invalid-feedback">
+            Por favor, preencha este campo.
+        </div>
+        </div>
+  
+        <div class="form-floating mt-2">
+          <input type="category" name="category" class="form-control" id="id_category" placeholder="category" required>
+          <label for="floatingInput">categoria</label>
+          <div class="invalid-feedback">
+            Por favor, preencha este campo.
+        </div>
+        </div>
+        <button class="btn btn-primary w-100 py-2 mt-2" type="submit" >Editar</button>
+        <button type="button" class="btn w-100 py-2 mt-2 btn-success" onclick="mostrarFormularioCadastro()">Cadastrar Cliente</button>
+      </form>
+    </div>
+   -->
+      
+  
+    </main>
+  
+<br>
+<br>
+
+{% include 'templatebase/footer.html' %}

@@ -3,7 +3,7 @@
 
 <main class="form-signin w-100 h-100 m-auto">
     <br>
-    <h2>User</h2>
+    <h2>Parceiros</h2>
     
 
     
@@ -12,30 +12,30 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">username</th>
-                    <th scope="col">email</th>
-                    <th scope="col">date_joined</th>
-                    <th scope="col">is_superuser</th>
+                    <th scope="col">Nome Empresa Parceira</th>
+                    <th scope="col">Path Base</th>
+                    <th scope="col">Status on</th>
+                    <th scope="col">Adicionado</th>
                 </tr>
             </thead>
             
             <tbody>
-                {% for User in mUser %}
+                {% for partner in partners%}
                 <tr>
-                    <td scope="row"><a class='nav-link link-primary fw-semibold' href="">{{ User.id }}</a></td>
-                    <td >{{ User.username }}</td>
-                    <td>{{ User.email }}</td>
-                    <td>{{ User.date_joined }}</td>
-                    <td>{{User.is_superuser}}</td>
+                    <td scope="row"><a class='nav-link link-primary fw-semibold' href="">{{partner.id}}</a></td>
+                    <td>{{partner.name_empresa}}</td>
+                    <td>{{partner.pathbase}}</td>
+                    <td>{{partner.is_active}}</td>
+                    <td>{{partner.date_cadastro}}</td>
                 </tr>
-                {% endfor %}
+               {%endfor%}
             </tbody>
         </table>
     </div>
     
     <form method="post" action="">
         {% csrf_token %}
-        <div class="modal fade" id="confirmDeleteModal{{ User.id }}" tabindex="-1"
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1"
              aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -54,6 +54,8 @@
         </div>
     </form>
 
+    
+    {% include 'templatebase/_pagination.html' %}
 
 </main>
 

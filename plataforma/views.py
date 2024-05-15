@@ -14,15 +14,22 @@ import pandas as pd
 def index(request):
     mUser = User.objects.all().values()
     
+    quantAssociations = dataCollectPrevent()[0]
+    
+    totVenda = dataCollectPrevent()[1]
+    
+    quantPartners = dataCollectPrevent()[2]
+    
+    medLifePartners = quantAssociations / quantPartners
+    
     context = {
         'mUser': mUser,
+        'numero_de_linhas': quantAssociations,
+        'totVendaPrevent': totVenda,
+        'quantPartners':quantPartners,
+        'medLifePartners':medLifePartners,
     }
-    
-    # if request.user.is_authenticated:
-    #     user_name = request.user
-    #     print(user_name.email)
-        
-    dataCollectPrevent()
+
     
     template = loader.get_template('index.html')
     
@@ -32,25 +39,18 @@ def index(request):
 
 def dataCollectPrevent():
         
-        planilha = pd.read_excel('relatorio_prevent_senior.xlsx')
+        planilhaPrevent = pd.read_excel('baseDados/relatorio_prevent_senior.xlsx')
 
-        numero_de_linhas = len(planilha)
+        numero_de_linhas = len(planilhaPrevent)
         totalVenda_prevent = 0
-        print(numero_de_linhas)
+        cont = 1
+
         # Iterar sobre os IDs e armazená-los em uma variável
-        for index, row in planilha.iterrows():
+        for index, row in planilhaPrevent.iterrows():
                 if numero_de_linhas == 1:
                         print('Planilha de pedido vazia')
                         break
                 else:
-                        totalVenda_prevent += row['valor']
-        print(totalVenda_prevent)
+                        totalVenda_prevent += row['valor']    
         
-        context = {
-        'numero_de_linhas': numero_de_linhas,
-        'totVendaPrevent': totalVenda_prevent,
-        }
-        
-        template = loader.get_template('index.html')
-        
-        return HttpResponse(template.render(context))
+        return numero_de_linhas, totalVenda_prevent, cont
