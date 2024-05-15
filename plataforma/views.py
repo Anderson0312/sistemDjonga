@@ -16,18 +16,28 @@ def index(request):
     
     quantAssociations = dataCollectPrevent()[0]
     
-    totVenda = dataCollectPrevent()[1]
+    VendaConfirma =round(dataCollectPrevent()[2],3)
     
-    quantPartners = dataCollectPrevent()[2]
+    quantPartners = dataCollectPrevent()[4]
+    
+    contratoConfi = dataCollectPrevent()[3]
+    
+    contratoPende = dataCollectPrevent()[5]
+    
+    totalVendaPrev_prevent = dataCollectPrevent()[1]
     
     medLifePartners = quantAssociations / quantPartners
+
     
     context = {
         'mUser': mUser,
         'numero_de_linhas': quantAssociations,
-        'totVendaPrevent': totVenda,
+        'totVendaPrevent': VendaConfirma,
         'quantPartners':quantPartners,
         'medLifePartners':medLifePartners,
+        "contratoConfi":contratoConfi,
+        "contratoPende":contratoPende,
+        "totalVendaPrev_prevent": totalVendaPrev_prevent,
     }
 
     
@@ -42,8 +52,11 @@ def dataCollectPrevent():
         planilhaPrevent = pd.read_excel('baseDados/relatorio_prevent_senior.xlsx')
 
         numero_de_linhas = len(planilhaPrevent)
-        totalVenda_prevent = 0
+        totalVendaPrev_prevent = 0
+        totalVendaConfir_prevent = 0
+        contratoConfi = 0
         cont = 1
+        contratoPende = 0
 
         # Iterar sobre os IDs e armazená-los em uma variável
         for index, row in planilhaPrevent.iterrows():
@@ -51,6 +64,11 @@ def dataCollectPrevent():
                         print('Planilha de pedido vazia')
                         break
                 else:
-                        totalVenda_prevent += row['valor']    
+                        totalVendaPrev_prevent += row['valor']   
+                        if row['status']  == 'Sim':
+                                contratoConfi +=1 
+                                totalVendaConfir_prevent += row['valor']
+                        else:
+                               contratoPende +=1  
         
-        return numero_de_linhas, totalVenda_prevent, cont
+        return numero_de_linhas, totalVendaPrev_prevent, totalVendaConfir_prevent, contratoConfi, cont, contratoPende

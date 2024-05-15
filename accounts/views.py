@@ -8,11 +8,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as login_django
 
-from django.urls import reverse
 from django.shortcuts import redirect
+from django.urls import reverse, reverse_lazy
 
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
+from django.views.generic import DeleteView
 
 from accounts.models import UserProfile
 
@@ -102,7 +103,13 @@ def users(request):
     return HttpResponse(template.render(context, request))
 
 
+        
+class user_delete(DeleteView):
+    model = User
+    success_url = reverse_lazy('users')  # substitua pelo nome da sua URL
 
+    
+    
  
         
           

@@ -27,7 +27,7 @@
       <div class="col-md-3">
         <div class="card bg-danger">
           <div class="card-body">
-            <h5 class="card-title">Número de Associados</h5>
+            <h5 class="card-title">Número de Contratos</h5>
             <p class="card-text text-white font-weight-bold display-6">{{numero_de_linhas}}</p>
           </div>
         </div>
@@ -43,7 +43,7 @@
       <div class="col-md-3">
         <div class="card bg-success">
           <div class="card-body">
-            <h5 class="card-title">Valor Total das vendas</h5>
+            <h5 class="card-title">Extrato de comissão</h5>
             <p class="card-text text-white font-weight-bold display-6">R$ {{totVendaPrevent}} </p>
           </div>
         </div>
@@ -51,7 +51,36 @@
     
     </div>
   </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card bg-primary">
+          <div class="card-body">
+            <h5 class="card-title">Pagamento Pendentes</h5>
+            <p class="card-text text-white font-weight-bold display-6">{{contratoPende}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-success">
+          <div class="card-body">
+            <h5 class="card-title">Pagamento Confirmadas</h5>
+            <p class="card-text text-white font-weight-bold display-6">{{contratoConfi}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-success">
+          <div class="card-body">
+            <h5 class="card-title">Extrato total Previsto</h5>
+            <p class="card-text text-white font-weight-bold display-6">R$ {{totalVendaPrev_prevent}} </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
 
 
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
