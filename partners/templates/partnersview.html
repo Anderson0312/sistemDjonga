@@ -16,6 +16,7 @@
                     <th scope="col">Path Base</th>
                     <th scope="col">Status on</th>
                     <th scope="col">Adicionado</th>
+                    <th scope="col">função</th>
                 </tr>
             </thead>
             
@@ -27,7 +28,36 @@
                     <td>{{partner.pathbase}}</td>
                     <td>{{partner.is_active}}</td>
                     <td>{{partner.date_cadastro}}</td>
+                    <td>
+                        <button data-product-id="{{ partner.id }}" type="button" class="btn btn-danger"
+                                data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ partner.id }}">
+                                <i class="bi bi-trash3"></i>
+                            
+                        </button>
+
+                        <!-- <button data-product-id="{{ partner.id }}" type="button"  class="btn btn-warning" onclick="mostrarFormularioEdicao()">Editar<i class="bi bi-pencil-square"></i></button> -->
+                    </td>
                 </tr>
+                <form method="post" action="{% url 'partner_delete' partner.id %}">
+                    {% csrf_token %}
+                    <div class="modal fade" id="confirmDeleteModal{{ partner.id }}" tabindex="-1"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <h2>Tem certeza que deseja deletar o produto "{{ partner.name_empresa }}"?</h2>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                {%endfor%}
             </tbody>
         </table>
